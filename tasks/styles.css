@@ -50,9 +50,44 @@ nav #logout-button:hover{
     padding: 10px;
 }
 
+
+.Todo-list{
+    height: 350px;
+    width: 250px;
+    background-color: rgba(219, 255, 255, 0.2);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+
+#todo-list{
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;   /* change from row → column */
+    padding: 0;
+    margin-top: 10px;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+#todo-list li{
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 5px 0;
+    padding: 8px;
+    border-radius: 5px;
+}
+.new-task,
+.Todo-list{
+    min-width: 250px;
+}
 #new-task-title{
     background-color: rgb(52, 52, 251);
-    
+}
+
+#todo-list-title{
+    background-color: rgb(52, 52, 251);
 }
 .bottom-buttons{
     margin: 10px;
@@ -72,10 +107,13 @@ nav #logout-button:hover{
 
 .main-body{
     display: flex;
-    align-items: center;   /* vertical center */
-    justify-content: flex-start; /* align left */
-    height: calc(100vh - 100px);  
-    padding-left: 50px;  
+    align-items: center; 
+    justify-content: flex-start;  /* start from left */
+    gap: 30px;                    /* space between the boxes */
+    padding-left: 50px;           /* space from left border */
+    height: calc(100vh - 100px);
+    
+
 }
 
 .bottom-btn{
