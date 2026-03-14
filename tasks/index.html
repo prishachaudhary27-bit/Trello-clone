@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,6 +35,37 @@
                 <button class="bottom-btn">Create</button>
             </div>
         </div>
+
+        <div class="Todo-list">
+            <span id="todo-list-title">
+            <h3>To-do List</h3>
+            </span>
+            <ul id="todo-list">
+                    <!-- Tasks will be added here -->
+            </ul>
+        </div>
+        <div class="task-details" id="task-details">
+            
+            <div class="details-header">
+                <h3>Task Details</h3>
+                
+                <button id="close-details">✖</button>
+            </div>
+
+            <h4 id="detail-heading"></h4>
+            <p id="detail-description"></p>
+        </div>
+        
     </div>
+<!-- Welcome Popup -->
+<div class="popup">
+  <div class="popup-content">
+    <h2 class="popup-message"></h2>
+    <p class="countdown"></p>
+    <button class="close-popup">Close</button>
+  </div>
+</div>
+
+    <script src="script.js"></script>
 </body>
 </html>

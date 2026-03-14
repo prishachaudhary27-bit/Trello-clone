@@ -50,9 +50,44 @@ nav #logout-button:hover{
     padding: 10px;
 }
 
+
+.Todo-list{
+    height: 350px;
+    width: 250px;
+    background-color: rgba(219, 255, 255, 0.2);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+
+#todo-list{
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;   /* change from row → column */
+    padding: 0;
+    margin-top: 10px;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+#todo-list li{
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 5px 0;
+    padding: 8px;
+    border-radius: 5px;
+}
+.new-task,
+.Todo-list{
+    min-width: 250px;
+}
 #new-task-title{
     background-color: rgb(52, 52, 251);
-    
+}
+
+#todo-list-title{
+    background-color: rgb(52, 52, 251);
 }
 .bottom-buttons{
     margin: 10px;
@@ -69,13 +104,37 @@ nav #logout-button:hover{
 .task-description{
     margin-top: 10px;
 }
+.task-details{
+    display: none;
+    width: 250px;
+    min-height: 200px;
+    background-color: rgba(219, 255, 255, 0.2);
+    padding: 10px;
+}
+
+.details-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#close-details{
+    background: red;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 3px 6px;
+}
 
 .main-body{
     display: flex;
-    align-items: center;   /* vertical center */
-    justify-content: flex-start; /* align left */
-    height: calc(100vh - 100px);  
-    padding-left: 50px;  
+    align-items: center; 
+    justify-content: flex-start;  /* start from left */
+    gap: 30px;                    /* space between the boxes */
+    padding-left: 50px;           /* space from left border */
+    height: calc(100vh - 100px);
+    
+
 }
 
 .bottom-btn{
@@ -91,4 +150,40 @@ nav #logout-button:hover{
 
 .bottom-btn:hover{
     transform: scale(1.05);
+}
+
+/* Popup background */
+.popup {
+  display: none; /* hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(5px);
+
+  justify-content: center;
+  align-items: center;
+
+  z-index: 9999;
+}
+
+/* Popup box */
+.popup .popup-content {
+  background: white;
+  color: black;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  width: 300px;
+
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.close-popup {
+  margin-top: 10px;
+  padding: 6px 12px;
+  cursor: pointer;
 }

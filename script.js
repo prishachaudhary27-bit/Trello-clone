@@ -1,3 +1,4 @@
+
 //   login and signup container view and hide logic
   const loginContainer = document.getElementById("login-container");
   const signupContainer = document.getElementById("signup-container");
@@ -44,7 +45,9 @@ document.getElementById("signup-form").addEventListener("submit",function(e){
         message.style.color = "green";
         message.textContent="Signup successful";
         
-        
+        localStorage.setItem("currentUser", JSON.stringify(newUser));
+
+
 
         // redirecting to home page
         window.location.href="tasks/index.html";
@@ -83,9 +86,13 @@ document.getElementById("login-form").addEventListener("submit",function(e){
         console.log("Login Successful");
         message.textContent="Login Successful"
 
+        localStorage.setItem("currentUser", JSON.stringify(user));
+
+
         // redirect after login successful
         window.location.href="tasks/index.html";
     }catch(error){
         console.log("Error: ",error);
     }
 });
+
