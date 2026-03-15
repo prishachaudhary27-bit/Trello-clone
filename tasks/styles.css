@@ -1,6 +1,7 @@
 *{
     padding: 0px;
     margin: 0px;
+    box-sizing: border-box;
 }
 
 body{
@@ -10,6 +11,7 @@ body{
     background-position: center;  
     background-attachment: fixed;
     color: white;
+    font-family: Arial, sans-serif;
 }
 
 nav{
@@ -38,6 +40,15 @@ nav #logout-button:hover{
     transform: scale(1.1);
 }
 
+.main-body{
+    display: flex;
+    align-items: center; 
+    justify-content: flex-start;
+    gap: 30px;
+    padding-left: 50px;
+    height: calc(100vh - 100px);
+}
+
 .new-task{
     height: 350px;
     width: 250px;
@@ -48,6 +59,58 @@ nav #logout-button:hover{
     padding: 10px;
 }
 
+#new-task-title{
+    background-color: rgb(52, 52, 251);
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.task-heading{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.task-heading textarea,
+.task-description textarea{
+    width: 100%;
+    resize: none;
+    padding: 4px;
+    border-radius: 4px;
+    border: none;
+    outline: none;
+}
+
+.task-description{
+    margin-top: 10px;
+    flex-grow: 1; /* makes textarea shrink to fit buttons */
+}
+
+.new-task hr{
+    border: 1px solid white;
+    margin: 5px 0;
+}
+
+.bottom-buttons{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px; /* push buttons slightly below textareas */
+}
+
+.bottom-btn{
+    width: 3.5rem;
+    height: 1.5rem;
+    font-size: 0.9rem;
+    border-radius: 10%;
+    transition: transform 0.3s ease;
+    background-color: rgb(52, 52, 251);
+    color: white;
+    border: none;
+}
+
+.bottom-btn:hover{
+    transform: scale(1.05);
+}
+
 .Todo-list{
     height: 350px;
     width: 250px;
@@ -56,6 +119,12 @@ nav #logout-button:hover{
     display: flex;
     flex-direction: column;
     padding: 10px;
+}
+
+#todo-list-title{
+    background-color: rgb(52, 52, 251);
+    padding: 4px;
+    border-radius: 4px;
 }
 
 #todo-list{
@@ -73,36 +142,6 @@ nav #logout-button:hover{
     margin: 5px 0;
     padding: 8px;
     border-radius: 5px;
-    cursor: pointer;
-}
-
-.new-task,
-.Todo-list{
-    min-width: 250px;
-}
-
-#new-task-title{
-    background-color: rgb(52, 52, 251);
-}
-
-#todo-list-title{
-    background-color: rgb(52, 52, 251);
-}
-
-.bottom-buttons{
-    margin: 10px;
-    display: flex;
-    margin-top: auto;
-    justify-content: space-between;
-}
-
-.task-heading{
-    margin-top: 10px;
-    margin-bottom: 20px;
-}
-
-.task-description{
-    margin-top: 10px;
 }
 
 .task-details{
@@ -127,32 +166,6 @@ nav #logout-button:hover{
     padding: 3px 6px;
 }
 
-.main-body{
-    display: flex;
-    align-items: center; 
-    justify-content: flex-start;
-    gap: 30px;
-    padding-left: 50px;
-    height: calc(100vh - 100px);
-}
-
-.bottom-btn{
-    margin-right: 20px;
-    width: 3.5rem;
-    height: 1.5rem;
-    font-size: 0.9rem;
-    border-radius: 10%;
-    transition: transform 0.3s ease;
-    background-color: rgb(52, 52, 251);
-    color: white;
-}
-
-.bottom-btn:hover{
-    transform: scale(1.05);
-}
-
-/* ---------- NEW TASK DETAIL BUTTONS ---------- */
-
 .task-actions{
     display: flex;
     justify-content: space-between;
@@ -160,71 +173,49 @@ nav #logout-button:hover{
 }
 
 #complete-task{
-    background-color: green;
-    color: white;
+    background: green;
     border: none;
+    color: white;
     padding: 6px 10px;
     cursor: pointer;
     border-radius: 4px;
-}
-
-#complete-task:hover{
-    background-color: darkgreen;
 }
 
 #close-task{
-    background-color: gray;
-    color: white;
+    background: gray;
     border: none;
+    color: white;
     padding: 6px 10px;
     cursor: pointer;
     border-radius: 4px;
 }
 
-#close-task:hover{
-    background-color: darkgray;
+/* Popup */
+.popup{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(5px);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
 }
 
-/* Completed task style */
-
-.completed{
-    text-decoration: line-through;
-    color: lightgray;
+.popup .popup-content{
+    background: white;
+    color: black;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    width: 300px;
 }
 
-
-/* ---------- POPUP ---------- */
-
-.popup {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-
-  background: rgba(0,0,0,0.5);
-  backdrop-filter: blur(5px);
-
-  justify-content: center;
-  align-items: center;
-
-  z-index: 9999;
-}
-
-.popup .popup-content {
-  background: white;
-  color: black;
-  padding: 20px;
-  border-radius: 8px;
-  text-align: center;
-  width: 300px;
-
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-}
-
-.close-popup {
-  margin-top: 10px;
-  padding: 6px 12px;
-  cursor: pointer;
+.close-popup{
+    margin-top: 10px;
+    padding: 6px 12px;
+    cursor: pointer;
 }
