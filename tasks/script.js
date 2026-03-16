@@ -128,3 +128,22 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     renderTasks();
 });
+
+
+// logout
+
+document.getElementById("logout-button").addEventListener("click", function(){
+
+    localStorage.removeItem("currentUser");
+
+    window.location.href = "../index.html";
+});
+
+
+// to make accessible login page if and only if logged in
+
+let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+if(!currentUser){
+    window.location.href = "../index.html";
+}
