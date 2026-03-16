@@ -1,90 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tasks</title>
-    <link rel="stylesheet" href="styles.css" >
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tasks</title>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <nav>
-    <div class="logo">Trello-Clone</div>
-    <div class="menu">
-        <button id="logout-button">Logout</button>
-    </div>
+  <div class="logo">Trello-Clone</div>
+  <div class="menu">
+    <button id="logout-button">Logout</button>
+  </div>
 </nav>
 
 <div class="main-body">
 
-    <div class="new-task">
-
-        <span id="new-task-title">
-            <h3>New Task</h3>
-        </span>
-
-        <br>
-
-        <div class="task-heading">
-            <textarea rows="2" placeholder="Heading"></textarea>
-        </div>
-
-        <hr/>
-
-        <div class="task-description">
-            <textarea name="description" id="description" rows="12" cols="22" placeholder="Enter the Description."></textarea>
-        </div>
-
-        <br>
-
-        <div class="bottom-buttons">
-            <button class="bottom-btn">Cancel</button>
-            <button class="bottom-btn">Create</button>
-        </div>
-
+  <div class="new-task">
+    <span id="new-task-title"><h3>New Task</h3></span>
+    <div class="task-heading">
+      <textarea rows="2" placeholder="Heading"></textarea>
+    </div><hr/>
+    <div class="task-description">
+      <textarea id="description" rows="8" placeholder="Enter the Description."></textarea>
     </div>
-
-
-    <div class="Todo-list">
-
-        <span id="todo-list-title">
-            <h3>To-do List</h3>
-        </span>
-
-        <ul id="todo-list">
-            <!-- Tasks will be added here -->
-        </ul>
-
+    <div class="bottom-buttons">
+      <button class="bottom-btn">Cancel</button>
+      <button class="bottom-btn">Create</button>
     </div>
+  </div>
 
+  <div class="Todo-list">
+    <span id="todo-list-title"><h3>To-do List</h3></span>
+    <ul id="todo-list"></ul>
+  </div>
 
-    <!-- Task Details Box -->
-
-    <div class="task-details" id="task-details">
-
-        <div class="details-header">
-            <h3>Task Details</h3>
-            <button id="close-details">✖</button>
-        </div>
-
-        <h4 id="detail-heading"></h4>
-
-        <p id="detail-description"></p>
-
-        <!-- Added buttons here -->
-
-        <div class="task-actions">
-            <button id="complete-task">Complete</button>
-            <button id="close-task">Close</button>
-        </div>
-
+  <div class="task-details" id="task-details">
+    <div class="details-header">
+      <h3>Task Details</h3>
+      <button id="close-details">✖</button>
     </div>
+    <h4 id="detail-heading"></h4>
+    <p id="detail-description"></p>
+    <div class="task-actions">
+      <button id="complete-task">Complete</button>
+      <button id="close-task">Close</button>
+    </div>
+  </div>
 
 </div>
 
-
-<!-- Welcome Popup -->
-
+<!-- Popup -->
 <div class="popup">
   <div class="popup-content">
     <h2 class="popup-message"></h2>
@@ -93,8 +60,6 @@
   </div>
 </div>
 
-
 <script src="script.js"></script>
-
 </body>
 </html>
