@@ -1,98 +1,108 @@
+// Import Firebase functions
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-analytics.js";
+import { 
+  getAuth, 
+  createUserWithEmailAndPassword, 
+  signInWithEmailAndPassword, 
+  onAuthStateChanged, 
+  updateProfile 
+} from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
 
-//   login and signup container view and hide logic
-  const loginContainer = document.getElementById("login-container");
-  const signupContainer = document.getElementById("signup-container");
+// Firebase config
+const firebaseConfig = {
+  apiKey: "AIzaSyBdmDP0qznW_yn9KEG0ipzRyk8m_kKhTus",
+  authDomain: "trello-clone-29492.firebaseapp.com",
+  projectId: "trello-clone-29492",
+  storageBucket: "trello-clone-29492.appspot.com",   
+  messagingSenderId: "339885575591",
+  appId: "1:339885575591:web:a0d47181017202034d7a82",
+  measurementId: "G-417CQ4PY3G"
+};
 
-  document.getElementById("show-signup").addEventListener("click", function(e) {
-    e.preventDefault();
-    loginContainer.classList.remove("active");
+// Initialize
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const auth = getAuth(app);
+
+// ---------------- SIGNUP ----------------
+document.getElementById("signup-form").addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  let name = document.getElementById("name").value.trim();
+  let email = document.getElementById("email").value.trim();
+  let password = document.getElementById("password").value.trim();
+  let message = document.getElementById("signup-message");
+
+  createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      let user = userCredential.user;
+
+      updateProfile(user, { displayName: name });
+
+      
+      const userData = {
+        email: user.email,
+        name: name
+      };
+      localStorage.setItem("currentUser", JSON.stringify(userData));
+
+      window.location.href = "tasks/index.html";
+    })
+    .catch((error) => {
+      message.style.color = "red";
+      message.textContent = error.message;
+    });
+});
+
+
+// ---------------- LOGIN ----------------
+document.getElementById("login-form").addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  let email = document.getElementById("login-email").value.trim();
+  let password = document.getElementById("login-password").value.trim();
+  let message = document.getElementById("login-message");
+
+  signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      let user = userCredential.user;
+
+      
+      const userData = {
+        email: user.email,
+        name: user.displayName || ""
+      };
+
+      localStorage.setItem("currentUser", JSON.stringify(userData));
+
+      window.location.href = "tasks/index.html";
+    })
+    .catch((error) => {
+      message.style.color = "red";
+      message.textContent = error.message;
+    });
+});
+
+
+// ---------------- AUTH STATE ----------------
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    console.log("Logged in:", user.email);
+  } else {
+    console.log("No user");
+  }
+});
+
+const signupContainer = document.getElementById("signup-container");
+const loginContainer = document.getElementById("login-container");
+
+document.getElementById("show-signup").addEventListener("click", () => {
     signupContainer.classList.add("active");
-  });
+    loginContainer.classList.remove("active");
+});
 
-  document.getElementById("show-login").addEventListener("click", function(e) {
-    e.preventDefault();
-    signupContainer.classList.remove("active");
+document.getElementById("show-login").addEventListener("click", () => {
     loginContainer.classList.add("active");
-  });
-
-//   signup form to local storage 
-
-document.getElementById("signup-form").addEventListener("submit",function(e){
-    e.preventDefault();//to stop the page from reload
-
-    let name=document.getElementById("name").value;
-    let email=document.getElementById("email").value;
-    let password=document.getElementById("password").value;
-    let message=document.getElementById("signup-message");
-    try{
-
-        let users=JSON.parse(localStorage.getItem("users")) || [];
-        let existingUser=users.find(user=> user.email === email);
-
-        if(existingUser){
-            console.log("User already exits");
-            message.textContent="User already exits"
-            return;
-        }
-        let newUser={
-            name:name,email:email,password:password
-        };
-        users.push(newUser);
-
-        localStorage.setItem("users",JSON.stringify(users));
-
-        console.log("Signup successful");
-        message.style.color = "green";
-        message.textContent="Signup successful";
-        
-        localStorage.setItem("currentUser", JSON.stringify(newUser));
-
-
-
-        // redirecting to home page
-        window.location.href="tasks/index.html";
-
-    }catch(error){
-        console.log("Error:",error);
-    }
+    signupContainer.classList.remove("active");
 });
-
-// login form value matching
-
-document.getElementById("login-form").addEventListener("submit",function(e){
-
-    e.preventDefault();
-
-    let email=document.getElementById("login-email").value;
-    let password=document.getElementById("login-password").value;
-    let message=document.getElementById("login-message");
-    try{
-
-        let users=JSON.parse(localStorage.getItem("users")) || [];
-        let user=users.find(u => u.email===email);
-
-        if(!user){
-            console.log("No person with this email");
-            message.textContent="No person with this email"
-            return;
-        }
-
-        if(user.password !== password){
-            console.log("Password is incorrect");
-            message.textContent="Password is incorrect"
-            return;
-        }
-
-        console.log("Login Successful");
-        message.textContent="Login Successful"
-
-        localStorage.setItem("currentUser", JSON.stringify(user));
-
-
-        // redirect after login successful
-        window.location.href="tasks/index.html";
-    }catch(error){
-        console.log("Error: ",error);
-    }
-});
-

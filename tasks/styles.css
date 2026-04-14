@@ -50,7 +50,6 @@ nav #logout-button:hover{
 }
 
 .new-task{
-    height: 350px;
     width: 250px;
     background-color: rgba(219, 255, 255, 0.2); 
     text-align: center;
@@ -58,7 +57,10 @@ nav #logout-button:hover{
     flex-direction: column;
     padding: 10px;
 }
-
+.additonal{
+    display: none;
+    margin-top: 10px;
+}
 #new-task-title{
     background-color: rgb(52, 52, 251);
     padding: 4px;
@@ -144,6 +146,44 @@ nav #logout-button:hover{
     border-radius: 5px;
 }
 
+
+/* running */
+
+
+.running-list{
+    height: 350px;
+    width: 250px;
+    background-color: rgba(219, 255, 255, 0.2);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+#running-list-title{
+    background-color: rgb(52, 52, 251);
+    padding: 4px;
+    border-radius: 4px;
+}
+
+#running-list{
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin-top: 10px;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+#running-list li{
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 5px 0;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+
 .task-details{
     display: none;
     width: 250px;
@@ -218,4 +258,66 @@ nav #logout-button:hover{
     margin-top: 10px;
     padding: 6px 12px;
     cursor: pointer;
+}
+
+.running-list,
+.Todo-list,
+.new-task{
+    min-height: 350px;
+    min-width: 250px;
+}
+
+.running-list ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+
+.completed-list {
+    height: 350px;
+    width: 250px;
+    background-color: rgba(219, 255, 255, 0.2);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+#completed-list-title {
+    background-color: green;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+#completed-list {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin-top: 10px;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+#completed-list li {
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 5px 0;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+li {
+    cursor: grab;
+}
+
+li:active {
+    cursor: grabbing;
+    opacity: 0.5;
+}
+
+#todo-list.drag-over,
+#running-list.drag-over,
+#completed-list.drag-over {
+    border: 2px dashed white;
 }

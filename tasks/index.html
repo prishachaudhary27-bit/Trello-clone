@@ -25,14 +25,24 @@
     <div class="task-description">
       <textarea id="description" rows="8" placeholder="Enter the Description."></textarea>
     </div>
+    
+    <button>+ Addidtional</button>
+    <div class="additonal">
+      <div class="assing-to" >
+        Assign To - <input type="email" id="assign-email">
+        Additional Links - <input type="url">
+        Any refrence document - <input type="file">
+      </div>
+    </div>
     <div class="bottom-buttons">
+
       <button class="bottom-btn">Cancel</button>
       <button class="bottom-btn">Create</button>
     </div>
   </div>
 
   <div class="Todo-list">
-    <span id="todo-list-title"><h3>To-do List</h3></span>
+    <span id="todo-list-title"><h3>To-Do</h3></span>
     <ul id="todo-list"></ul>
   </div>
 
@@ -45,10 +55,21 @@
     <p id="detail-description"></p>
     <div class="task-actions">
       <button id="complete-task">Complete</button>
+      <button id="running-btn" class="bottom-btn">Running</button>
       <button id="close-task">Close</button>
     </div>
   </div>
 
+
+  <div class="running-list"> 
+    <span id="running-list-title"><h3>Running</h3></span>
+    <ul id="running-list"></ul>
+  </div>
+
+  <div class="completed-list">    
+  <span id="completed-list-title"><h3>Completed</h3></span>
+  <ul id="completed-list"></ul>
+</div>
 </div>
 
 <!-- Popup -->
@@ -60,6 +81,6 @@
   </div>
 </div>
 
-<script src="script.js"></script>
+<script type="module" src="script.js"></script>
 </body>
 </html>
