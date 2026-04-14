@@ -1,86 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tasks</title>
-<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taskflow — Board</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<nav>
-  <div class="logo">Trello-Clone</div>
-  <div class="menu">
-    <button id="logout-button">Logout</button>
-  </div>
-</nav>
+  <div class="bg-mesh"></div>
 
-<div class="main-body">
-
-  <div class="new-task">
-    <span id="new-task-title"><h3>New Task</h3></span>
-    <div class="task-heading">
-      <textarea rows="2" placeholder="Heading"></textarea>
-    </div><hr/>
-    <div class="task-description">
-      <textarea id="description" rows="8" placeholder="Enter the Description."></textarea>
-    </div>
-    
-    <button>+ Addidtional</button>
-    <div class="additonal">
-      <div class="assing-to" >
-        Assign To - <input type="email" id="assign-email">
-        Additional Links - <input type="url">
-        Any refrence document - <input type="file">
+  <!-- NAVBAR -->
+  <nav>
+    <div class="nav-left">
+      <div class="logo">
+        <div class="logo-mark">
+          <span></span><span></span><span></span>
+        </div>
+        <span>Taskflow</span>
+      </div>
+      <div class="breadcrumb">
+        <span>My Board</span>
       </div>
     </div>
-    <div class="bottom-buttons">
+    <div class="nav-right">
+      <div class="user-badge" id="user-badge">
+        <div class="avatar" id="user-avatar">J</div>
+        <span id="user-name">User</span>
+      </div>
+      <button id="logout-button" class="logout-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Logout
+      </button>
+    </div>
+  </nav>
 
-      <button class="bottom-btn">Cancel</button>
-      <button class="bottom-btn">Create</button>
+  <!-- BOARD -->
+  <main class="board">
+
+    <!-- NEW TASK COLUMN -->
+    <div class="column new-task-col">
+      <div class="col-header">
+        <div class="col-title-wrap">
+          <span class="col-dot new-dot"></span>
+          <h3>New Task</h3>
+        </div>
+      </div>
+      <div class="task-form">
+        <div class="form-field">
+          <textarea id="task-heading" rows="2" placeholder="Task title…" class="field-input"></textarea>
+        </div>
+        <div class="form-field">
+          <textarea id="description" rows="5" placeholder="Describe this task…" class="field-input"></textarea>
+        </div>
+
+        <button class="expand-btn" id="toggle-additional">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Additional options
+        </button>
+
+        <div class="additional-section" id="additional-section">
+          <div class="form-field">
+            <label class="field-label">Assign to (email)</label>
+            <div class="input-icon-wrap">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <input type="email" id="assign-email" placeholder="colleague@example.com" class="field-input-sm">
+            </div>
+          </div>
+          <div class="form-field">
+            <label class="field-label">Reference URL</label>
+            <div class="input-icon-wrap">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+              <input type="url" placeholder="https://…" class="field-input-sm">
+            </div>
+          </div>
+          <div class="form-field">
+            <label class="field-label">Attachment</label>
+            <input type="file" class="file-input">
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn-ghost" id="cancel-btn">Discard</button>
+          <button class="btn-create" id="create-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Create Task
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TODO COLUMN -->
+    <div class="column">
+      <div class="col-header">
+        <div class="col-title-wrap">
+          <span class="col-dot todo-dot"></span>
+          <h3>To Do</h3>
+        </div>
+        <span class="col-count" id="todo-count">0</span>
+      </div>
+      <ul class="task-list" id="todo-list" data-status="todo"></ul>
+    </div>
+
+    <!-- RUNNING COLUMN -->
+    <div class="column">
+      <div class="col-header">
+        <div class="col-title-wrap">
+          <span class="col-dot running-dot"></span>
+          <h3>In Progress</h3>
+        </div>
+        <span class="col-count" id="running-count">0</span>
+      </div>
+      <ul class="task-list" id="running-list" data-status="running"></ul>
+    </div>
+
+    <!-- COMPLETED COLUMN -->
+    <div class="column">
+      <div class="col-header">
+        <div class="col-title-wrap">
+          <span class="col-dot done-dot"></span>
+          <h3>Completed</h3>
+        </div>
+        <span class="col-count" id="completed-count">0</span>
+      </div>
+      <ul class="task-list" id="completed-list" data-status="completed"></ul>
+    </div>
+
+  </main>
+
+  <!-- TASK DETAIL DRAWER -->
+  <div class="drawer-overlay" id="drawer-overlay"></div>
+  <div class="drawer" id="task-drawer">
+    <div class="drawer-header">
+      <div class="drawer-status" id="drawer-status-badge"></div>
+      <button class="drawer-close" id="close-drawer">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="drawer-body">
+      <h2 id="drawer-heading" class="drawer-title"></h2>
+      <p id="drawer-description" class="drawer-desc"></p>
+      <div class="drawer-meta" id="drawer-meta"></div>
+    </div>
+    <div class="drawer-actions">
+      <p class="drawer-actions-label">Move to</p>
+      <div class="drawer-btns">
+        <button class="drawer-action-btn todo-btn" id="move-todo">
+          <span class="col-dot todo-dot"></span> To Do
+        </button>
+        <button class="drawer-action-btn running-btn" id="move-running">
+          <span class="col-dot running-dot"></span> In Progress
+        </button>
+        <button class="drawer-action-btn done-btn" id="move-done">
+          <span class="col-dot done-dot"></span> Complete
+        </button>
+        <button class="drawer-action-btn delete-btn" id="delete-task">
+  🗑 Delete Task
+</button>
+      </div>
     </div>
   </div>
 
-  <div class="Todo-list">
-    <span id="todo-list-title"><h3>To-Do</h3></span>
-    <ul id="todo-list"></ul>
-  </div>
-
-  <div class="task-details" id="task-details">
-    <div class="details-header">
-      <h3>Task Details</h3>
-      <button id="close-details">✖</button>
-    </div>
-    <h4 id="detail-heading"></h4>
-    <p id="detail-description"></p>
-    <div class="task-actions">
-      <button id="complete-task">Complete</button>
-      <button id="running-btn" class="bottom-btn">Running</button>
-      <button id="close-task">Close</button>
-    </div>
-  </div>
-
-
-  <div class="running-list"> 
-    <span id="running-list-title"><h3>Running</h3></span>
-    <ul id="running-list"></ul>
-  </div>
-
-  <div class="completed-list">    
-  <span id="completed-list-title"><h3>Completed</h3></span>
-  <ul id="completed-list"></ul>
-</div>
-</div>
-
-<!-- Popup -->
-<div class="popup">
-  <div class="popup-content">
-    <h2 class="popup-message"></h2>
-    <p class="countdown"></p>
-    <button class="close-popup">Close</button>
-  </div>
-</div>
-
-<script type="module" src="script.js"></script>
+  <script type="module" src="script.js"></script>
 </body>
 </html>
